@@ -35,9 +35,11 @@ class SVCModel():
     def calculate_f1_score(self, X, y):
         if self.svc is None:
             raise ValueError("SVC model has not been trained yet. Please call 'fit' first.")
-        
         y_pred = self.predict(X)
-        f1 = f1_score(y[self.attribute], y_pred)
+        if y[self.attribute].nunique() < 2:
+            f1 = f1_score(y[self.attribute], y_pred)
+        else:
+            f1 = f1_score(y[self.attribute], y_pred, average='micro')
         return f1
     
     def calculate_precision_score(self, X, y):
@@ -45,7 +47,10 @@ class SVCModel():
             raise ValueError("SVC model has not been trained yet. Please call 'fit' first.")
         
         y_pred = self.predict(X)
-        precision = precision_score(y[self.attribute], y_pred)
+        if y[self.attribute].nunique() < 2:
+            precision = precision_score(y[self.attribute], y_pred)
+        else:
+            precision = precision_score(y[self.attribute], y_pred, average='micro')
         return precision
     
     def calculate_recall_score(self, X, y):
@@ -53,5 +58,8 @@ class SVCModel():
             raise ValueError("SVC model has not been trained yet. Please call 'fit' first.")
         
         y_pred = self.predict(X)
-        recall = recall_score(y[self.attribute], y_pred)
+        if y[self.attribute].nunique() < 2:
+            recall = recall_score(y[self.attribute], y_pred)
+        else:
+            recall = recall_score(y[self.attribute], y_pred, average='micro')
         return recall

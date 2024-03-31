@@ -1,7 +1,8 @@
 import optuna
 from sklearn.metrics import precision_score, recall_score, f1_score, accuracy_score
-from model import SVCModel
+from sklearn.model_selection import train_test_split
 import joblib
+from model import SVCModel
 
 class SVCTuner:
     def __init__(self, X_train, y_train, X_test, y_test, attribute=None):
@@ -12,7 +13,7 @@ class SVCTuner:
 
     def objective(self, trial):
         kernel = trial.suggest_categorical('kernel', ['linear', 'poly', 'rbf', 'sigmoid'])
-        C = trial.suggest_loguniform('C', 1e-5, 100)
+        C = trial.suggest_float('C', 1e-5, 100)
         gamma = trial.suggest_categorical('gamma', ['scale', 'auto'])
         
         svc_model = SVCModel(kernel=kernel, C=C, gamma=gamma, attribute=self.attribute)
@@ -52,5 +53,4 @@ class SVCTuner:
         print("Best Model - recall Score:", best_recall)
         print("Best Model - precision Score:", best_precision)
         print("Best Hyperparameters:", self.best_params)
-
 
