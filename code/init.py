@@ -5,9 +5,12 @@ import pandas as pd
 import joblib
 
 if __name__ == "__main__":
+    #load w2v model
     w2v_300dims = W2VLoader(
         w2v_path='/kaggle/input/phow2v/word2vec_vi_words_300dims/word2vec_vi_words_300dims.txt'
     )
+
+    #load data
     train, val, test = read_data_from_csv()
 
     X_train, y_train = load_data(train, w2v_300dims)
