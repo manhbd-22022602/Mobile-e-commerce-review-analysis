@@ -10,39 +10,59 @@ Tài liệu này được viết để các thành viên nắm bắt cách hoạ
 
 ## data_loader.py
 
-- **Mô tả:** Sử dụng module này để load dữ liệu từ các file csv vào chương trình.
-- **Input:** Đường dẫn đến file Train.csv và Val.csv.
-- **Output:** Hai đối tượng `train` và `val` có thể là pandas DataFrame hoặc pandas Series chứa dữ liệu từ các file csv tương ứng.
+### Mô tả
+Module này được sử dụng để load dữ liệu từ các file CSV vào chương trình.
+
+**`clean_n_tokenize_data`**
+   - Mô tả: Hàm này được sử dụng để làm sạch và mã hóa văn bản đầu vào.
+   - Input:
+     - `sent` (str): Văn bản đầu vào cần xử lý.
+     - `w2v`: Mô hình Word2Vec để mã hóa.
+   - Output:
+     - `tokenized_sent` (list): Biểu diễn đã mã hóa của văn bản đầu vào.
+
+**`read_data_from_csv`**
+   - Mô tả: Hàm này đọc dữ liệu từ các file CSV.
+   - Input: Không có tham số truyền vào.
+   - Output:
+     - `train` (DataFrame): Dữ liệu huấn luyện.
+     - `val` (DataFrame): Dữ liệu validation.
+     - `test` (DataFrame): Dữ liệu kiểm tra.
+
+**`load_data`**
+   - Mô tả: Hàm này tải và tiền xử lý dữ liệu.
+   - Input:
+     - `data` (DataFrame): Dữ liệu đầu vào chứa cột 'Comments'.
+     - `w2v`: Mô hình Word2Vec để mã hóa.
+   - Output:
+     - `tokenized_reviews` (ndarray): Các đánh giá đã được mã hóa.
+     - `labels` (DataFrame): Nhãn liên quan đến các đánh giá.
 
 ## preprocess.py
 
-- **Mô tả:** Tiền xử lý dữ liệu để loại bỏ nhiễu và chuẩn hóa.
-- **Input:** Một câu văn cần được tiền xử lý.
-- **Output:** Một câu văn bản đã được xử lý để loại bỏ nhiễu và chuẩn hóa dữ liệu.
+### Mô tả
+Tiền xử lý dữ liệu để loại bỏ nhiễu và chuẩn hóa.
+
+**`text_preprocess`**
+   - Mô tả: Hàm này được sử dụng để làm sạch văn bản đầu vào.
+   - Input:
+     - `text` (str): Văn bản đầu vào cần xử lý.
+   - Output:
+     - `text` (str): Văn bản đầu vào đã được xử lý.
 
 ## vectorizer.py
 
 - **Mô tả:** Chuyển đổi từ dữ liệu văn bản thành dạng số học.
-- **Input:** Một từ.
-- **Output:** Một vector số học biểu diễn cho từ.
+
 
 ## model.py
 
 - **Mô tả:** Tạo và huấn luyện các mô hình.
-- **Input:** Loại mô hình cần tạo và huấn luyện.
-- **Output:** Một đối tượng mô hình đã được khởi tạo hoặc huấn luyện, sẵn sàng cho việc sử dụng.
+
 
 ## training.py
 
 - **Mô tả:** Sử dụng dữ liệu và mô hình để huấn luyện.
-- **Input:** Dữ liệu huấn luyện và mô hình đã được khởi tạo.
-- **Output:** Các thông số đánh giá như accuracy, F1 score, precision của mô hình sau quá trình huấn luyện.
-
-## metrics.py
-
-- **Mô tả:** Sử dụng các hàm để đánh giá chất lượng của mô hình.
-- **Input:** Không có đầu vào cụ thể, vì các hàm đánh giá được sử dụng cho việc đánh giá chất lượng mô hình.
-- **Output:** Không có đầu ra cụ thể, nhưng cần đảm bảo rằng các hàm đánh giá được cung cấp đúng cách.
 
 ## demo.py
 
