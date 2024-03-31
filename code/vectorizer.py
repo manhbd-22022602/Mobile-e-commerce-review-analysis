@@ -1,4 +1,38 @@
+#vectorizer.py
+import numpy as np
 from gensim.models import KeyedVectors
+
+def tokenize_all_reviews(embed_model, dims, reviews):
+    # split each review into a list of words
+    reviews_words = [review.split() for review in reviews]
+
+    tokenized_reviews = []
+    for review in reviews_words:
+        mean_embedding = np.zeros(dims)
+        num_words = 0
+        for word in review:
+            try:
+                mean_embedding += embed_model[word]
+                num_words += 1
+            except:
+                continue
+        mean_embedding /= num_words
+        tokenized_reviews.append(mean_embedding)
+
+    return tokenized_reviews 
+
+def tokenize_reviews(embed_model, dims, sent):
+    words = sent.split()
+    mean_embedding = np.zeros(dims)
+    num_words = 0
+    for word in words:
+        try:
+            mean_embedding += embed_model[word]
+            num_words += 1
+        except:
+            continue
+    mean_embedding /= num_words
+    return mean_embedding
 
 class W2VLoader():
     def __init__(self, w2v_path=''):
