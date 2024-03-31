@@ -18,3 +18,5 @@ build/
 .env
 flagged/
 ignore_folder/
+refactor_data.ipynb
+demo.ipynb
