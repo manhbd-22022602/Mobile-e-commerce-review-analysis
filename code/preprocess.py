@@ -2,6 +2,7 @@
 import regex as re
 from underthesea import word_tokenize
 import string
+import codecs
 
 # remove html tags
 def remove_html(txt):
@@ -176,69 +177,150 @@ def remove_numbers(sent):
 def normalize_acronyms(sent):
     text = sent
     replace_list = {
-        'ô kêi': ' ok ', 'okie': ' ok ', ' o kê ': ' ok ',
-        'okey': ' ok ', 'ôkê': ' ok ', 'oki': ' ok ', ' oke ':  ' ok ',' okay':' ok ','okê':' ok ',
-        ' tks ': u' cám ơn ', 'thks': u' cám ơn ', 'thanks': u' cám ơn ', 'ths': u' cám ơn ', 'thank': u' cám ơn ',
-        '⭐': 'star ', '*': 'star ', '🌟': 'star ', '🎉': u' tích cực ',
-        'kg ': u' không ','not': u' không ', u' kg ': u' không ', '"k ': u' không ',' kh ':u' không ','kô':u' không ','hok':u' không ',' kp ': u' không phải ',u' kô ': u' không ', '"ko ': u' không ', u' ko ': u' không ', u' k ': u' không ', 'khong': u' không ', u' hok ': u' không ',
-        'he he': ' tích cực ','hehe': ' tích cực ','hihi': ' tích cực ', 'haha': ' tích cực ', 'hjhj': ' tích cực ',
-        ' lol ': ' tiêu cực ',' cc ': ' tiêu cực ','cute': u' dễ thương ','huhu': ' tiêu cực ', ' vs ': u' với ', 'wa': ' quá ', 'wá': u' quá', 'j': u' gì ', '“': ' ',
-        ' sz ': u' cỡ ', 'size': u' cỡ ', u' đx ': u' được ', 'dk': u' được ', 'dc': u' được ', 'đk': u' được ',
-        'đc': u' được ','authentic': u' chuẩn chính hãng ',u' aut ': u' chuẩn chính hãng ', u' auth ': u' chuẩn chính hãng ', 'thick': u' tích cực ', 'store': u' cửa hàng ',
-        'shop': u' cửa hàng ', 'sp': u' sản phẩm ', 'gud': u' tốt ','god': u' tốt ','wel done':' tốt ', 'good': u' tốt ', 'gút': u' tốt ',
-        'sấu': u' xấu ','gut': u' tốt ', u' tot ': u' tốt ', u' nice ': u' tốt ', 'perfect': 'rất tốt', 'bt': u' bình thường ',
-        'time': u' thời gian ', 'qá': u' quá ', u' ship ': u' giao hàng ', u' m ': u' mình ', u' mik ': u' mình ',
-        'ể': 'ể', 'product': 'sản phẩm', 'quality': 'chất lượng','chat':' chất ', 'excelent': 'hoàn hảo', 'bad': 'tệ','fresh': ' tươi ','sad': ' tệ ',
-        'date': u' hạn sử dụng ', 'hsd': u' hạn sử dụng ','quickly': u' nhanh ', 'quick': u' nhanh ','fast': u' nhanh ','delivery': u' giao hàng ',u' síp ': u' giao hàng ',
-        'beautiful': u' đẹp tuyệt vời ', u' tl ': u' trả lời ', u' r ': u' rồi ', u' shopE ': u' cửa hàng ',u' order ': u' đặt hàng ',
-        'chất lg': u' chất lượng ',u' sd ': u' sử dụng ',u' dt ': u' điện thoại ',u' nt ': u' nhắn tin ',u' tl ': u' trả lời ',u' sài ': u' xài ',u'bjo':u' bao giờ ',
-        'thik': u' thích ',u' sop ': u' cửa hàng ', ' fb ': ' facebook ', ' face ': ' facebook ', ' very ': u' rất ',u'quả ng ':u' quảng  ',
-        'dep': u' đẹp ',u' xau ': u' xấu ','delicious': u' ngon ', u'hàg': u' hàng ', u'qủa': u' quả ',
-        'iu': u' yêu ','fake': u' giả mạo ', 'trl': 'trả lời', '><': u' tích cực ',
-        ' por ': u' tệ ',' poor ': u' tệ ', 'ib':u' nhắn tin ', 'rep':u' trả lời ',u'fback':' feedback ','fedback':' feedback ',
-        'ô kêi': 'ok', 'okie': 'ok', 'o kê': 'ok', 'okey': 'ok', 'ôkê': 'ok', 'oki': 'ok', 'oke': 'ok', 'okay': 'ok', 'okê': 'ok',
-        'tks': 'cảm ơn', 'thks': 'cảm ơn', 'thanks': 'cảm ơn', 'ths': 'cảm ơn', 'thank': 'cảm ơn',
-        'kg': 'không', 'not': 'không', 'k': 'không', 'kh': 'không', 'kô': 'không', 'hok': 'không', 'ko': 'không', 'khong': 'không', 'kp': 'không phải',
-        'he he': 'tích cực', 'hehe': 'tích cực', 'hihi': 'tích cực', 'haha': 'tích cực', 'hjhj': 'tích cực', 'thick': 'tích cực',
-        'lol': 'tiêu cực', 'cc': 'tiêu cực', 'huhu': 'tiêu cực', 'cute': 'dễ thương',
-        
-        'sz': 'cỡ', 'size': 'cỡ', 
-        'wa': 'quá', 'wá': 'quá', 'qá': 'quá', 
-        'đx': 'được', 'dk': 'được', 'dc': 'được', 'đk': 'được', 'đc': 'được', 
-        'vs': 'với', 'j': 'gì', '“': ' ', 'time': 'thời gian', 'm': 'mình', 'mik': 'mình', 'r': 'rồi', 'bjo': 'bao giờ', 'very': 'rất',
-
-        'authentic': 'chuẩn chính hãng', 'aut': 'chuẩn chính hãng', 'auth': 'chuẩn chính hãng', 'date': 'hạn sử dụng', 'hsd': 'hạn sử dụng', 
-        'store': 'cửa hàng', 'sop': 'cửa hàng', 'shopE': 'cửa hàng', 'shop': 'cửa hàng', 
-        'sp': 'sản phẩm', 'product': 'sản phẩm', 'hàg': 'hàng', 
-        'ship': 'giao hàng', 'delivery': 'giao hàng', 'síp': 'giao hàng', 'order': 'đặt hàng',
-
-        'gud': 'tốt', 'wel done': 'tốt', 'good': 'tốt', 'gút': 'tốt', 'tot': 'tốt', 'nice': 'tốt', 'perfect': 'rất tốt', 
-        'quality': 'chất lượng', 'chất lg': 'chất lượng', 'chat': 'chất', 'excelent': 'hoàn hảo', 'bt': 'bình thường',
-        'sad': 'tệ', 'por': 'tệ', 'poor': 'tệ', 'bad': 'tệ', 
-        'beautiful': 'đẹp tuyệt vời', 'dep': 'đẹp', 
-        'xau': 'xấu', 'sấu': 'xấu', 
-        
-        'thik': 'thích', 'iu': 'yêu', 'fake': 'giả mạo', 
-        'quickly': 'nhanh', 'quick': 'nhanh', 'fast': 'nhanh',
-        'fresh': 'tươi', 'delicious': 'ngon',
-
-        'dt': 'điện thoại', 'fb': 'facebook', 'face': 'facebook', 'ks': 'khách sạn', 'nv': 'nhân viên',
-        'nt': 'nhắn tin', 'ib': 'nhắn tin', 'tl': 'trả lời', 'trl': 'trả lời', 'rep': 'trả lời',
-        'fback': 'feedback', 'fedback': 'feedback',
-        'sd': 'sử dụng', 'sài': 'xài', 
-
-        '^_^': 'tích cực', ':)': 'tích cực', ':(': 'tiêu cực',
-        '❤️': 'tích cực', '👍': 'tích cực', '🎉': 'tích cực', '😀': 'tích cực', '😍': 'tích cực', '😂': 'tích cực', '🤗': 'tích cực', '😙': 'tích cực', '🙂': 'tích cực', 
-        '😔': 'tiêu cực', '😓': 'tiêu cực', 
-        '⭐': 'star', '*': 'star', '🌟': 'star',
-    }
+            "òa": "oà",
+        "Òa": "Oà",
+        "ÒA": "OÀ",
+        "óa": "oá",
+        "Óa": "Oá",
+        "ÓA": "OÁ",
+        "ỏa": "oả",
+        "Ỏa": "Oả",
+        "ỎA": "OẢ",
+        "õa": "oã",
+        "Õa": "Oã",
+        "ÕA": "OÃ",
+        "ọa": "oạ",
+        "Ọa": "Oạ",
+        "ỌA": "OẠ",
+        "òe": "oè",
+        "Òe": "Oè",
+        "ÒE": "OÈ",
+        "óe": "oé",
+        "Óe": "Oé",
+        "ÓE": "OÉ",
+        "ỏe": "oẻ",
+        "Ỏe": "Oẻ",
+        "ỎE": "OẺ",
+        "õe": "oẽ",
+        "Õe": "Oẽ",
+        "ÕE": "OẼ",
+        "ọe": "oẹ",
+        "Ọe": "Oẹ",
+        "ỌE": "OẸ",
+        "ùy": "uỳ",
+        "Ùy": "Uỳ",
+        "ÙY": "UỲ",
+        "úy": "uý",
+        "Úy": "Uý",
+        "ÚY": "UÝ",
+        "ủy": "uỷ",
+        "Ủy": "Uỷ",
+        "ỦY": "UỶ",
+        "ũy": "uỹ",
+        "Ũy": "Uỹ",
+        "ŨY": "UỸ",
+        "ụy": "uỵ",
+        "Ụy": "Uỵ",
+        "ỤY": "UỴ",
+        'ả': 'ả', 'ố': 'ố', 'u´': 'ố','ỗ': 'ỗ', 'ồ': 'ồ', 'ổ': 'ổ', 'ấ': 'ấ', 'ẫ': 'ẫ', 'ẩ': 'ẩ',
+        'ầ': 'ầ', 'ỏ': 'ỏ', 'ề': 'ề','ễ': 'ễ', 'ắ': 'ắ', 'ủ': 'ủ', 'ế': 'ế', 'ở': 'ở', 'ỉ': 'ỉ',
+        'ẻ': 'ẻ', 'àk': u' à ','aˋ': 'à', 'iˋ': 'ì', 'ă´': 'ắ','ử': 'ử', 'e˜': 'ẽ', 'y˜': 'ỹ', 'a´': 'á',
+            #Quy các icon về 2 loại emoj: Tích cực hoặc tiêu cực
+            "👹": "negative", "👻": "positive", "💃": "positive",'🤙': ' positive ', '👍': ' positive ',
+            "💄": "positive", "💎": "positive", "💩": "positive","😕": "negative", "😱": "negative", "😸": "positive",
+            "😾": "negative", "🚫": "negative",  "🤬": "negative","🧚": "positive", "🧡": "positive",'🐶':' positive ',
+            '👎': ' negative ', '😣': ' negative ','✨': ' positive ', '❣': ' positive ','☀': ' positive ',
+            '♥': ' positive ', '🤩': ' positive ', 'like': ' positive ', '💌': ' positive ',
+            '🤣': ' positive ', '🖤': ' positive ', '🤤': ' positive ', ':(': ' negative ', '😢': ' negative ',
+            '❤': ' positive ', '😍': ' positive ', '😘': ' positive ', '😪': ' negative ', '😊': ' positive ',
+            '?': ' ? ', '😁': ' positive ', '💖': ' positive ', '😟': ' negative ', '😭': ' negative ',
+            '💯': ' positive ', '💗': ' positive ', '♡': ' positive ', '💜': ' positive ', '🤗': ' positive ',
+            '^^': ' positive ', '😨': ' negative ', '☺': ' positive ', '💋': ' positive ', '👌': ' positive ',
+            '😖': ' negative ', '😀': ' positive ', ':((': ' negative ', '😡': ' negative ', '😠': ' negative ',
+            '😒': ' negative ', '🙂': ' positive ', '😏': ' negative ', '😝': ' positive ', '😄': ' positive ',
+            '😙': ' positive ', '😤': ' negative ', '😎': ' positive ', '😆': ' positive ', '💚': ' positive ',
+            '✌': ' positive ', '💕': ' positive ', '😞': ' negative ', '😓': ' negative ', '️🆗️': ' positive ',
+            '😉': ' positive ', '😂': ' positive ', ':v': '  positive ', '=))': '  positive ', '😋': ' positive ',
+            '💓': ' positive ', '😐': ' negative ', ':3': ' positive ', '😫': ' negative ', '😥': ' negative ',
+            '😃': ' positive ', '😬': ' 😬 ', '😌': ' 😌 ', '💛': ' positive ', '🤝': ' positive ', '🎈': ' positive ',
+            '😗': ' positive ', '🤔': ' negative ', '😑': ' negative ', '🔥': ' negative ', '🙏': ' negative ',
+            '🆗': ' positive ', '😻': ' positive ', '💙': ' positive ', '💟': ' positive ',
+            '😚': ' positive ', '❌': ' negative ', '👏': ' positive ', ';)': ' positive ', '<3': ' positive ',
+            '🌝': ' positive ',  '🌷': ' positive ', '🌸': ' positive ', '🌺': ' positive ',
+            '🌼': ' positive ', '🍓': ' positive ', '🐅': ' positive ', '🐾': ' positive ', '👉': ' positive ',
+            '💐': ' positive ', '💞': ' positive ', '💥': ' positive ', '💪': ' positive ',
+            '💰': ' positive ',  '😇': ' positive ', '😛': ' positive ', '😜': ' positive ',
+            '🙃': ' positive ', '🤑': ' positive ', '🤪': ' positive ','☹': ' negative ',  '💀': ' negative ',
+            '😔': ' negative ', '😧': ' negative ', '😩': ' negative ', '😰': ' negative ', '😳': ' negative ',
+            '😵': ' negative ', '😶': ' negative ', '🙁': ' negative ',
+            #Chuẩn hóa 1 số sentiment words/English words
+            ':))': '  positive ', ':)': ' positive ', 'ô kêi': ' ok ', 'okie': ' ok ', ' o kê ': ' ok ',
+            'okey': ' ok ', 'ôkê': ' ok ', 'oki': ' ok ', ' oke ':  ' ok ',' okay':' ok ','okê':' ok ',
+            ' tks ': u' cám ơn ', 'thks': u' cám ơn ', 'thanks': u' cám ơn ', 'ths': u' cám ơn ', 'thank': u' cám ơn ',
+            '⭐': 'star ', '*': 'star ', '🌟': 'star ', '🎉': u' positive ',
+            'kg ': u' không ','not': u' không ', u' kg ': u' không ', '"k ': u' không ',' kh ':u' không ','kô':u' không ','hok':u' không ',' kp ': u' không phải ',u' kô ': u' không ', '"ko ': u' không ', u' ko ': u' không ', u' k ': u' không ', 'khong': u' không ', u' hok ': u' không ',
+            'he he': ' positive ','hehe': ' positive ','hihi': ' positive ', 'haha': ' positive ', 'hjhj': ' positive ',
+            ' lol ': ' negative ',' cc ': ' negative ','cute': u' dễ thương ','huhu': ' negative ', ' vs ': u' với ', 'wa': ' quá ', 'wá': u' quá', 'j': u' gì ', '“': ' ',
+            ' sz ': u' cỡ ', 'size': u' cỡ ', u' đx ': u' được ', 'dk': u' được  ', 'dc': u' được ', 'đk': u' được ',
+            'đc': u' được ','authentic': u' chuẩn chính hãng ',u' aut ': u' chuẩn chính hãng ', u' auth ': u' chuẩn chính hãng ', 'thick': u' positive ', 'store': u' cửa hàng ',
+            'shop': u' cửa hàng ', 'sp': u' sản phẩm ', 'gud': u' tốt ','god': u' tốt ','wel done':' tốt ', 'good': u' tốt ', 'gút': u' tốt ',
+            'sấu': u' xấu ','gut': u' tốt ', u' tot ': u' tốt ', u' nice ': u' tốt ', 'perfect': 'rất tốt', 'bt': u' bình thường ',
+            'time': u' thời gian ', 'qá': u' quá ', u' ship ': u' giao hàng ', u' m ': u' mình ', u' mik ': u' mình ',
+            'ể': 'ể', 'product': 'sản phẩm', 'quality': 'chất lượng','chat':' chất ', 'excelent': 'hoàn hảo', 'bad': 'tệ','fresh': ' tươi ','sad': ' tệ ',
+            'date': u' hạn sử dụng ', 'hsd': u' hạn sử dụng ','quickly': u' nhanh ', 'quick': u' nhanh ','fast': u' nhanh ','delivery': u' giao hàng ',u' síp ': u' giao hàng ',
+            'beautiful': u' đẹp tuyệt vời ', u' tl ': u' trả lời ', u' r ': u' rồi ', u' shopE ': u' cửa hàng ',u' order ': u' đặt hàng ',
+            'chất lg': u' chất lượng ',u' sd ': u' sử dụng ',u' dt ': u' điện thoại ',u' nt ': u' nhắn tin ',u' tl ': u' trả lời ',u' sài ': u' xài ',u'bjo':u' bao giờ ',
+            'thik': u' thích ',u' sop ': u' cửa hàng ', ' fb ': ' facebook ', ' face ': ' facebook ', ' very ': u' rất ',u'quả ng ':u' quảng  ',
+            'dep': u' đẹp ',u' xau ': u' xấu ','delicious': u' ngon ', u'hàg': u' hàng ', u'qủa': u' quả ',
+            'iu': u' yêu ','fake': u' giả mạo ', 'trl': 'trả lời', '><': u' positive ', 'nv' : 'nhân viên', 'nvien' : 'nhân viên',
+            ' por ': u' tệ ',' poor ': u' tệ ', 'ib':u' nhắn tin ', 'rep':u' trả lời ',u'fback':' feedback ','fedback':' feedback ', 'pùn' : 'buồn', 'tuỵt vời' : 'tuyệt vời',
+            #dưới 3* quy về 1*, trên 3* quy về 5*
+            '6 sao': ' 5star ','6 star': ' 5star ', '5star': ' 5star ','5 sao': ' 5star ','5sao': ' 5star ',
+            'starstarstarstarstar': ' 5star ', '1 sao': ' 1star ', '1sao': ' 1star ','2 sao':' 1star ','2sao':' 1star ',
+            '2 starstar':' 1star ','1star': ' 1star ', '0 sao': ' 1star ', '0star': ' 1star ',
+            }
     for k, v in replace_list.items():
         text = text.replace(k, v)
     return text
 
+# Từ điển tích cực, tiêu cực, phủ định
+def load_sentiment_dicts(path_pos, path_nag, path_not):
+    with codecs.open(path_pos, 'r', encoding='UTF-8') as f:
+        pos = f.readlines()
+    pos_list = [n.strip() for n in pos]
 
+    with codecs.open(path_nag, 'r', encoding='UTF-8') as f:
+        nag = f.readlines()
+    nag_list = [n.strip() for n in nag]
+
+    with codecs.open(path_not, 'r', encoding='UTF-8') as f:
+        not_ = f.readlines()
+    not_list = [n.strip() for n in not_]
+
+    return pos_list, nag_list, not_list
+
+# Phân tích tình cảm bằng từ điển được xác định trước
+def sentiment_analysis(text, pos_list, nag_list, not_list):
+    words = text.split()
+    score = 0
+
+    for word in words:
+        if word in pos_list:
+            score += 1
+        elif word in nag_list:
+            score -= 1
+        elif word in not_list:
+            score = -score
+
+    if score > 0:
+        return "Tích cực"
+    elif score < 0:
+        return "Tiêu cực"
+    else:
+        return "Trung tính"
+    
 # overall preprocessing
-def text_preprocess(document):
+def text_preprocess(document, pos_list, nag_list, not_list):
     #đưa về lower
     document = document.lower()
     # xóa html code
@@ -263,4 +345,7 @@ def text_preprocess(document):
     document = document.lower()
     # xóa các ký tự không cần thiết
     document = remove_unnecessary(document)
+    #
+    document = sentiment_analysis(document, pos_list, nag_list, not_list)
+
     return document.translate(str.maketrans(string.punctuation, ' ' * len(string.punctuation))).replace(' '*4, ' ').replace(' '*3, ' ').replace(' '*2, ' ').strip()
