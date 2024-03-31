@@ -224,5 +224,9 @@ with gr.Blocks() as demo:
     inputs = [text_box, choose_plot_aspect_dropdown, choose_plot_sentiment_dropdown],
     outputs = [output_plot1, plot_aspect, plot_sentiment],
 )
+    
+def main():
+    return demo.launch(share=True)
 
-demo.launch(share=True)
+if __name__ == '__main__':
+    main()

@@ -19,28 +19,28 @@ if __name__ == "__main__":
 
     #tuning
     svm_Pin = SVCTuner(X_train, y_train, X_val, y_val, attribute='Pin')
-    svm_Pin.tune(n_trials=1000)
+    svm_Pin.tune(n_trials=100)
 
     svm_Service = SVCTuner(X_train, y_train, X_val, y_val, attribute='Service')
-    svm_Service.tune(n_trials=1000)
+    svm_Service.tune(n_trials=100)
 
     svm_General = SVCTuner(X_train, y_train, X_val, y_val, attribute='General')
-    svm_General.tune(n_trials=1000)  
+    svm_General.tune(n_trials=100)  
 
     svm_Others = SVCTuner(X_train, y_train, X_val, y_val, attribute='Others')
-    svm_Others.tune(n_trials=1000)
+    svm_Others.tune(n_trials=100)
 
     svm_SPin = SVCTuner(X_train, y_train, X_val, y_val, attribute='SPin')
-    svm_SPin.tune(n_trials=1000)
+    svm_SPin.tune(n_trials=100)
 
     svm_SSer = SVCTuner(X_train, y_train, X_val, y_val, attribute='SSer')
-    svm_SSer.tune(n_trials=1000)
+    svm_SSer.tune(n_trials=100)
 
     svm_SGeneral = SVCTuner(X_train, y_train, X_val, y_val, attribute='SGeneral')
-    svm_SGeneral.tune(n_trials=1000)
+    svm_SGeneral.tune(n_trials=100)
 
     svm_SOth = SVCTuner(X_train, y_train, X_val, y_val, attribute='SOth')
-    svm_SOth.tune(n_trials=1000)
+    svm_SOth.tune(n_trials=100)
 
     #load model
     svm_Pin = joblib.load('bestModelPin')
@@ -52,3 +52,18 @@ if __name__ == "__main__":
     svm_SSer = joblib.load('bestModelSSer')
     svm_SGeneral = joblib.load('bestModelSGeneral')
     svm_SOth = joblib.load('bestModelSOth')
+
+    #evaluate
+    compare_table = {}
+    compare_table['Pin'] = svm_Pin.evaluate_best_model()
+    compare_table['Service'] = svm_Service.evaluate_best_model()
+    compare_table['General'] = svm_General.evaluate_best_model()
+    compare_table['Others'] = svm_Others.evaluate_best_model()
+
+    compare_table['SPin'] = svm_SPin.evaluate_best_model()
+    compare_table['SSer'] = svm_SSer.evaluate_best_model()
+    compare_table['SGeneral'] = svm_SGeneral.evaluate_best_model()
+    compare_table['SOthers'] = svm_SOth.evaluate_best_model()
+
+    compare_df = pd.DataFrame(compare_table).T
+    print(compare_df)
