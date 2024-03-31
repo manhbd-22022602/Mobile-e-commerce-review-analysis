@@ -6,8 +6,8 @@ import optuna.visualization
 from model import SVCModel
 
 class SVCTuner:
-    def __init__(self, X_train, y_train, X_test, y_test, attribute=None):
-        self.X_train, self.y_train, self.X_test, self.y_test = X_train, y_train, X_test, y_test
+    def __init__(self, X_train, y_train, X_val, y_val, attribute=None):
+        self.X_train, self.y_train, self.X_val, self.y_val = X_train, y_train, X_val, y_val
         self.attribute = attribute
         self.best_params = None
         self.best_model = None
@@ -20,7 +20,7 @@ class SVCTuner:
         svc_model = SVCModel(kernel=kernel, C=C, gamma=gamma, attribute=self.attribute)
         svc_model.fit(self.X_train, self.y_train)
         
-        acc = svc_model.calculate_accuracy_score(self.X_test, self.y_test)
+        acc = svc_model.calculate_accuracy_score(self.X_val, self.y_val)
         
         return acc
 
@@ -39,7 +39,9 @@ class SVCTuner:
         
         return optuna.visualization.plot_optimization_history(study)
     
-    def evaluate_best_model(self):
+    def evaluate_best_model(self, X_test, y_test):
+        self.X_test = X_test
+        self.y_test = y_test
         if self.best_model is None:
             raise ValueError("No best model available. Please run tuning first.")
         
