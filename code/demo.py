@@ -102,7 +102,7 @@ def draw_bar_sentiment():
             orientation='h',
             name='Neutral',
             showlegend=True if i == 0 else False,
-            marker=dict(color='yellow')
+            marker=dict(color='orange')
         ))
         bars.append(go.Bar(
             y=[aspects[i]],
