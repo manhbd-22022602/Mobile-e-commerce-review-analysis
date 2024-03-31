@@ -53,3 +53,4 @@ class SVCTuner:
         print("Best Model - recall Score:", best_recall)
         print("Best Model - precision Score:", best_precision)
         print("Best Hyperparameters:", self.best_params)
+
