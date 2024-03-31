@@ -365,6 +365,6 @@ def text_preprocess(document, pos_list, nag_list, not_list):
     document = document.lower()
     # xóa các ký tự không cần thiết
     document = remove_unnecessary(document)
-    #
+    # xử lý vấn đề phủ định
     document = add_sentiment_features(document, pos_list, nag_list, not_list)
     return document.translate(str.maketrans(string.punctuation, ' ' * len(string.punctuation))).replace(' '*4, ' ').replace(' '*3, ' ').replace(' '*2, ' ').strip()

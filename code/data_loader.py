@@ -5,14 +5,19 @@ import pandas as pd
 import numpy as np
 
 def clean_n_tokenize_data(sent, w2v):
-    sent = text_preprocess(sent)
+    path_pos = 'sentiment_dicts/pos.txt'
+    path_nag = 'sentiment_dicts/nag.txt'
+    path_not = 'sentiment_dicts/not.txt'
+    pos_list, nag_list, not_list = load_sentiment_dicts(path_pos, path_nag, path_not)
+
+    sent = text_preprocess(sent, pos_list, nag_list, not_list)
     tokenized_sent = tokenize_reviews(w2v.embed_model, w2v.embedding_dim, sent)
     return tokenized_sent
 
 def read_data_from_csv():
-    train = pd.read_csv('/kaggle/input/absa-phone-vi/datasets/Train.csv')
-    val = pd.read_csv('/kaggle/input/absa-phone-vi/datasets/Val.csv')
-    test = pd.read_csv('/kaggle/input/absa-phone-vi/datasets/Test.csv')
+    train = pd.read_csv('datasets/Train.csv')
+    val = pd.read_csv('datasets/Val.csv')
+    test = pd.read_csv('datasets/Test.csv')
     return train, val, test
 
 def load_data(data, w2v):
