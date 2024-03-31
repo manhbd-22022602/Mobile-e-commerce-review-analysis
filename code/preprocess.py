@@ -3,6 +3,7 @@ import regex as re
 from underthesea import word_tokenize
 import string
 import codecs
+from pyvi import ViTokenizer
 
 # remove html tags
 def remove_html(txt):
@@ -279,6 +280,7 @@ def normalize_acronyms(sent):
             'starstarstarstarstar': ' 5star ', '1 sao': ' 1star ', '1sao': ' 1star ','2 sao':' 1star ','2sao':' 1star ',
             '2 starstar':' 1star ','1star': ' 1star ', '0 sao': ' 1star ', '0star': ' 1star ',
             }
+
     for k, v in replace_list.items():
         text = text.replace(k, v)
     return text
@@ -300,25 +302,43 @@ def load_sentiment_dicts(path_pos, path_nag, path_not):
     return pos_list, nag_list, not_list
 
 # Phân tích tình cảm bằng từ điển được xác định trước
-def sentiment_analysis(text, pos_list, nag_list, not_list):
-    words = text.split()
-    score = 0
+def add_sentiment_features(text, pos_list, nag_list, not_list):
+    # chuyen punctuation thành space
+    translator = str.maketrans(string.punctuation, ' ' * len(string.punctuation))
+    text = text.translate(translator)
 
-    for word in words:
-        if word in pos_list:
-            score += 1
-        elif word in nag_list:
-            score -= 1
-        elif word in not_list:
-            score = -score
+    text = ViTokenizer.tokenize(text)
+    texts = text.split()
+    len_text = len(texts)
 
-    if score > 0:
-        return "Tích cực"
-    elif score < 0:
-        return "Tiêu cực"
-    else:
-        return "Trung tính"
-    
+    texts = [t.replace('_', ' ') for t in texts]
+    for i in range(len_text):
+        cp_text = texts[i]
+        if cp_text in not_list: # Xử lý vấn đề phủ định (VD: áo này chẳng đẹp--> áo này notpos)
+            numb_word = 2 if len_text - i - 1 >= 4 else len_text - i - 1
+
+            for j in range(numb_word):
+                if texts[i + j + 1] in pos_list:
+                    texts[i] = 'notpos'
+                    texts[i + j + 1] = ''
+
+                if texts[i + j + 1] in nag_list:
+                    texts[i] = 'notnag'
+                    texts[i + j + 1] = ''
+        else: #Thêm feature cho những sentiment words (áo này đẹp--> áo này đẹp positive)
+            if cp_text in pos_list:
+                texts.append('positive')
+            elif cp_text in nag_list:
+                texts.append('nagative')
+
+    text = u' '.join(texts)
+
+    #remove nốt những ký tự thừa thãi
+    text = text.replace(u'"', u' ')
+    text = text.replace(u'️', u'')
+    text = text.replace('🏻','')
+    return text
+
 # overall preprocessing
 def text_preprocess(document, pos_list, nag_list, not_list):
     #đưa về lower
@@ -346,6 +366,5 @@ def text_preprocess(document, pos_list, nag_list, not_list):
     # xóa các ký tự không cần thiết
     document = remove_unnecessary(document)
     #
-    document = sentiment_analysis(document, pos_list, nag_list, not_list)
-
+    document = add_sentiment_features(document, pos_list, nag_list, not_list)
     return document.translate(str.maketrans(string.punctuation, ' ' * len(string.punctuation))).replace(' '*4, ' ').replace(' '*3, ' ').replace(' '*2, ' ').strip()
