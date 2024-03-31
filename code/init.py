@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
     #load data
     train, val, test = read_data_from_csv()
-
+    
     X_train, y_train = load_data(train, w2v_300dims)
     X_val, y_val = load_data(val, w2v_300dims)
     X_test, y_test = load_data(test, w2v_300dims)
