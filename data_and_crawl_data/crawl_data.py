@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from time import sleep
 import csv
 
-def crawl(index_of_products):
+def crawl(index_of_product):
     
     check = True
     
@@ -15,7 +15,7 @@ def crawl(index_of_products):
         sleep(3)
         
         # Click on the product
-        driver.find_element(By.XPATH, "//*[@id='categoryPage']/div[3]/ul/li["+ str(index_of_products) +"]").click()
+        driver.find_element(By.XPATH, "//*[@id='categoryPage']/div[3]/ul/li["+ str(index_of_product) +"]").click()
         sleep(3)
         
         try:
@@ -65,7 +65,8 @@ def crawl(index_of_products):
         driver.close()  # Close the driver
         
 def main():
-    crawl(1)
+    # Change index_of_product to crawl other product or use for loop to crawl many products
+    crawl(index_of_product=1)
     
 if __name__ == "__main__":
     main()
