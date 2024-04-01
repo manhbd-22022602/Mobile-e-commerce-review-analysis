@@ -227,43 +227,43 @@ def normalize_acronyms(sent):
         'ầ': 'ầ', 'ỏ': 'ỏ', 'ề': 'ề','ễ': 'ễ', 'ắ': 'ắ', 'ủ': 'ủ', 'ế': 'ế', 'ở': 'ở', 'ỉ': 'ỉ',
         'ẻ': 'ẻ', 'àk': u' à ','aˋ': 'à', 'iˋ': 'ì', 'ă´': 'ắ','ử': 'ử', 'e˜': 'ẽ', 'y˜': 'ỹ', 'a´': 'á',
             #Quy các icon về 2 loại emoj: Tích cực hoặc tiêu cực
-            "👹": "negative", "👻": "positive", "💃": "positive",'🤙': ' positive ', '👍': ' positive ',
-            "💄": "positive", "💎": "positive", "💩": "positive","😕": "negative", "😱": "negative", "😸": "positive",
-            "😾": "negative", "🚫": "negative",  "🤬": "negative","🧚": "positive", "🧡": "positive",'🐶':' positive ',
-            '👎': ' negative ', '😣': ' negative ','✨': ' positive ', '❣': ' positive ','☀': ' positive ',
-            '♥': ' positive ', '🤩': ' positive ', 'like': ' positive ', '💌': ' positive ',
-            '🤣': ' positive ', '🖤': ' positive ', '🤤': ' positive ', ':(': ' negative ', '😢': ' negative ',
-            '❤': ' positive ', '😍': ' positive ', '😘': ' positive ', '😪': ' negative ', '😊': ' positive ',
-            '?': ' ? ', '😁': ' positive ', '💖': ' positive ', '😟': ' negative ', '😭': ' negative ',
-            '💯': ' positive ', '💗': ' positive ', '♡': ' positive ', '💜': ' positive ', '🤗': ' positive ',
-            '^^': ' positive ', '😨': ' negative ', '☺': ' positive ', '💋': ' positive ', '👌': ' positive ',
-            '😖': ' negative ', '😀': ' positive ', ':((': ' negative ', '😡': ' negative ', '😠': ' negative ',
-            '😒': ' negative ', '🙂': ' positive ', '😏': ' negative ', '😝': ' positive ', '😄': ' positive ',
-            '😙': ' positive ', '😤': ' negative ', '😎': ' positive ', '😆': ' positive ', '💚': ' positive ',
-            '✌': ' positive ', '💕': ' positive ', '😞': ' negative ', '😓': ' negative ', '️🆗️': ' positive ',
-            '😉': ' positive ', '😂': ' positive ', ':v': '  positive ', '=))': '  positive ', '😋': ' positive ',
-            '💓': ' positive ', '😐': ' negative ', ':3': ' positive ', '😫': ' negative ', '😥': ' negative ',
-            '😃': ' positive ', '😬': ' 😬 ', '😌': ' 😌 ', '💛': ' positive ', '🤝': ' positive ', '🎈': ' positive ',
-            '😗': ' positive ', '🤔': ' negative ', '😑': ' negative ', '🔥': ' negative ', '🙏': ' negative ',
-            '🆗': ' positive ', '😻': ' positive ', '💙': ' positive ', '💟': ' positive ',
-            '😚': ' positive ', '❌': ' negative ', '👏': ' positive ', ';)': ' positive ', '<3': ' positive ',
-            '🌝': ' positive ',  '🌷': ' positive ', '🌸': ' positive ', '🌺': ' positive ',
-            '🌼': ' positive ', '🍓': ' positive ', '🐅': ' positive ', '🐾': ' positive ', '👉': ' positive ',
-            '💐': ' positive ', '💞': ' positive ', '💥': ' positive ', '💪': ' positive ',
-            '💰': ' positive ',  '😇': ' positive ', '😛': ' positive ', '😜': ' positive ',
-            '🙃': ' positive ', '🤑': ' positive ', '🤪': ' positive ','☹': ' negative ',  '💀': ' negative ',
-            '😔': ' negative ', '😧': ' negative ', '😩': ' negative ', '😰': ' negative ', '😳': ' negative ',
-            '😵': ' negative ', '😶': ' negative ', '🙁': ' negative ',
+            "👹": "Tiêu cực", "👻": "Tích cực", "💃": "Tích cực",'🤙': ' Tích cực ', '👍': ' Tích cực ',
+            "💄": "Tích cực", "💎": "Tích cực", "💩": "Tích cực","😕": "Tiêu cực", "😱": "Tiêu cực", "😸": "Tích cực",
+            "😾": "Tiêu cực", "🚫": "Tiêu cực",  "🤬": "Tiêu cực","🧚": "Tích cực", "🧡": "Tích cực",'🐶':' Tích cực ',
+            '👎': ' Tiêu cực ', '😣': ' Tiêu cực ','✨': ' Tích cực ', '❣': ' Tích cực ','☀': ' Tích cực ',
+            '♥': ' Tích cực ', '🤩': ' Tích cực ', 'like': ' Tích cực ', '💌': ' Tích cực ',
+            '🤣': ' Tích cực ', '🖤': ' Tích cực ', '🤤': ' Tích cực ', ':(': ' Tiêu cực ', '😢': ' Tiêu cực ',
+            '❤': ' Tích cực ', '😍': ' Tích cực ', '😘': ' Tích cực ', '😪': ' Tiêu cực ', '😊': ' Tích cực ',
+            '?': ' ? ', '😁': ' Tích cực ', '💖': ' Tích cực ', '😟': ' Tiêu cực ', '😭': ' Tiêu cực ',
+            '💯': ' Tích cực ', '💗': ' Tích cực ', '♡': ' Tích cực ', '💜': ' Tích cực ', '🤗': ' Tích cực ',
+            '^^': ' Tích cực ', '😨': ' Tiêu cực ', '☺': ' Tích cực ', '💋': ' Tích cực ', '👌': ' Tích cực ',
+            '😖': ' Tiêu cực ', '😀': ' Tích cực ', ':((': ' Tiêu cực ', '😡': ' Tiêu cực ', '😠': ' Tiêu cực ',
+            '😒': ' Tiêu cực ', '🙂': ' Tích cực ', '😏': ' Tiêu cực ', '😝': ' Tích cực ', '😄': ' Tích cực ',
+            '😙': ' Tích cực ', '😤': ' Tiêu cực ', '😎': ' Tích cực ', '😆': ' Tích cực ', '💚': ' Tích cực ',
+            '✌': ' Tích cực ', '💕': ' Tích cực ', '😞': ' Tiêu cực ', '😓': ' Tiêu cực ', '️🆗️': ' Tích cực ',
+            '😉': ' Tích cực ', '😂': ' Tích cực ', ':v': '  Tích cực ', '=))': '  Tích cực ', '😋': ' Tích cực ',
+            '💓': ' Tích cực ', '😐': ' Tiêu cực ', ':3': ' Tích cực ', '😫': ' Tiêu cực ', '😥': ' Tiêu cực ',
+            '😃': ' Tích cực ', '😬': ' 😬 ', '😌': ' 😌 ', '💛': ' Tích cực ', '🤝': ' Tích cực ', '🎈': ' Tích cực ',
+            '😗': ' Tích cực ', '🤔': ' Tiêu cực ', '😑': ' Tiêu cực ', '🔥': ' Tiêu cực ', '🙏': ' Tiêu cực ',
+            '🆗': ' Tích cực ', '😻': ' Tích cực ', '💙': ' Tích cực ', '💟': ' Tích cực ',
+            '😚': ' Tích cực ', '❌': ' Tiêu cực ', '👏': ' Tích cực ', ';)': ' Tích cực ', '<3': ' Tích cực ',
+            '🌝': ' Tích cực ',  '🌷': ' Tích cực ', '🌸': ' Tích cực ', '🌺': ' Tích cực ',
+            '🌼': ' Tích cực ', '🍓': ' Tích cực ', '🐅': ' Tích cực ', '🐾': ' Tích cực ', '👉': ' Tích cực ',
+            '💐': ' Tích cực ', '💞': ' Tích cực ', '💥': ' Tích cực ', '💪': ' Tích cực ',
+            '💰': ' Tích cực ',  '😇': ' Tích cực ', '😛': ' Tích cực ', '😜': ' Tích cực ',
+            '🙃': ' Tích cực ', '🤑': ' Tích cực ', '🤪': ' Tích cực ','☹': ' Tiêu cực ',  '💀': ' Tiêu cực ',
+            '😔': ' Tiêu cực ', '😧': ' Tiêu cực ', '😩': ' Tiêu cực ', '😰': ' Tiêu cực ', '😳': ' Tiêu cực ',
+            '😵': ' Tiêu cực ', '😶': ' Tiêu cực ', '🙁': ' Tiêu cực ',
             #Chuẩn hóa 1 số sentiment words/English words
-            ':))': '  positive ', ':)': ' positive ', 'ô kêi': ' ok ', 'okie': ' ok ', ' o kê ': ' ok ',
+            ':))': '  Tích cực ', ':)': ' Tích cực ', 'ô kêi': ' ok ', 'okie': ' ok ', ' o kê ': ' ok ',
             'okey': ' ok ', 'ôkê': ' ok ', 'oki': ' ok ', ' oke ':  ' ok ',' okay':' ok ','okê':' ok ',
             ' tks ': u' cám ơn ', 'thks': u' cám ơn ', 'thanks': u' cám ơn ', 'ths': u' cám ơn ', 'thank': u' cám ơn ',
-            '⭐': 'star ', '*': 'star ', '🌟': 'star ', '🎉': u' positive ',
+            '⭐': 'star ', '*': 'star ', '🌟': 'star ', '🎉': u' Tích cực ',
             'kg ': u' không ','not': u' không ', u' kg ': u' không ', '"k ': u' không ',' kh ':u' không ','kô':u' không ','hok':u' không ',' kp ': u' không phải ',u' kô ': u' không ', '"ko ': u' không ', u' ko ': u' không ', u' k ': u' không ', 'khong': u' không ', u' hok ': u' không ',
-            'he he': ' positive ','hehe': ' positive ','hihi': ' positive ', 'haha': ' positive ', 'hjhj': ' positive ',
-            ' lol ': ' negative ',' cc ': ' negative ','cute': u' dễ thương ','huhu': ' negative ', ' vs ': u' với ', 'wa': ' quá ', 'wá': u' quá', 'j': u' gì ', '“': ' ',
+            'he he': ' Tích cực ','hehe': ' Tích cực ','hihi': ' Tích cực ', 'haha': ' Tích cực ', 'hjhj': ' Tích cực ',
+            ' lol ': ' Tiêu cực ',' cc ': ' Tiêu cực ','cute': u' dễ thương ','huhu': ' Tiêu cực ', ' vs ': u' với ', 'wa': ' quá ', 'wá': u' quá', 'j': u' gì ', '“': ' ',
             ' sz ': u' cỡ ', 'size': u' cỡ ', u' đx ': u' được ', 'dk': u' được  ', 'dc': u' được ', 'đk': u' được ',
-            'đc': u' được ','authentic': u' chuẩn chính hãng ',u' aut ': u' chuẩn chính hãng ', u' auth ': u' chuẩn chính hãng ', 'thick': u' positive ', 'store': u' cửa hàng ',
+            'đc': u' được ','authentic': u' chuẩn chính hãng ',u' aut ': u' chuẩn chính hãng ', u' auth ': u' chuẩn chính hãng ', 'thick': u' Tích cực ', 'store': u' cửa hàng ',
             'shop': u' cửa hàng ', 'sp': u' sản phẩm ', 'gud': u' tốt ','god': u' tốt ','wel done':' tốt ', 'good': u' tốt ', 'gút': u' tốt ',
             'sấu': u' xấu ','gut': u' tốt ', u' tot ': u' tốt ', u' nice ': u' tốt ', 'perfect': 'rất tốt', 'bt': u' bình thường ',
             'time': u' thời gian ', 'qá': u' quá ', u' ship ': u' giao hàng ', u' m ': u' mình ', u' mik ': u' mình ',
@@ -273,7 +273,7 @@ def normalize_acronyms(sent):
             'chất lg': u' chất lượng ',u' sd ': u' sử dụng ',u' dt ': u' điện thoại ',u' nt ': u' nhắn tin ',u' tl ': u' trả lời ',u' sài ': u' xài ',u'bjo':u' bao giờ ',
             'thik': u' thích ',u' sop ': u' cửa hàng ', ' fb ': ' facebook ', ' face ': ' facebook ', ' very ': u' rất ',u'quả ng ':u' quảng  ',
             'dep': u' đẹp ',u' xau ': u' xấu ','delicious': u' ngon ', u'hàg': u' hàng ', u'qủa': u' quả ',
-            'iu': u' yêu ','fake': u' giả mạo ', 'trl': 'trả lời', '><': u' positive ', 'nv' : 'nhân viên', 'nvien' : 'nhân viên',
+            'iu': u' yêu ','fake': u' giả mạo ', 'trl': 'trả lời', '><': u' Tích cực ', 'nv' : 'nhân viên', 'nvien' : 'nhân viên',
             ' por ': u' tệ ',' poor ': u' tệ ', 'ib':u' nhắn tin ', 'rep':u' trả lời ',u'fback':' feedback ','fedback':' feedback ', 'pùn' : 'buồn', 'tuỵt vời' : 'tuyệt vời',
             #dưới 3* quy về 1*, trên 3* quy về 5*
             '6 sao': ' 5star ','6 star': ' 5star ', '5star': ' 5star ','5 sao': ' 5star ','5sao': ' 5star ',
@@ -325,11 +325,11 @@ def add_sentiment_features(text, pos_list, nag_list, not_list):
                 if texts[i + j + 1] in nag_list:
                     texts[i] = 'notnag'
                     texts[i + j + 1] = ''
-        else: #Thêm feature cho những sentiment words (áo này đẹp--> áo này đẹp positive)
+        else: #Thêm feature cho những sentiment words (áo này đẹp--> áo này đẹp Tích cực)
             if cp_text in pos_list:
-                texts.append('positive')
+                texts.append('Tích cực')
             elif cp_text in nag_list:
-                texts.append('nagative')
+                texts.append('Tiêu cực')
 
     text = u' '.join(texts)
 
