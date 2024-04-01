@@ -33,7 +33,7 @@ def crawl(index_of_products):
             for i in range(len(comments)):
                 txt = comments[i].text
                 n_stars = len(comments_stars[i].find_elements(By.CLASS_NAME, "iconcmt-starbuy"))
-                if (txt != "" or txt.strip() or (len(txt) >= 75 and len(txt) <= 300)):
+                if (txt != "" or txt.strip()):
                     writer.writerow([txt, n_stars, ""])
         except:
             check = False
@@ -55,7 +55,7 @@ def crawl(index_of_products):
                     for i in range(len(comments)):
                         txt = comments[i].text
                         n_stars = len(comments_stars[i].find_elements(By.CLASS_NAME, "iconcmt-starbuy"))
-                        if (txt != "" or txt.strip() or (len(txt) >= 75 and len(txt) <= 300)):
+                        if (txt != "" or txt.strip()):
                             writer.writerow([txt, n_stars, ""])
                 except:
                     pass
