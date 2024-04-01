@@ -152,7 +152,7 @@ def draw_pie_sentiment():
     # Vẽ biểu đồ pie cho mỗi khía cạnh
     for i, aspect in enumerate(aspects):
         labels = sentiments
-        values = sentiments_ratio[i]
+        values = [sentiments_ratio[i][2], sentiments_ratio[i][1], sentiments_ratio[i][0]] 
         
         # Tạo biểu đồ pie và thêm vào subplot tương ứng
         fig.add_trace(go.Pie(labels=labels, values=values, name=aspect), row=1, col=i+1)
