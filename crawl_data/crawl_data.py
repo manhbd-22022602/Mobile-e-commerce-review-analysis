@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from time import sleep
 import csv
 
-def crawl(index_of_product):
+def crawl(index_of_products):
     
     check = True
     
@@ -15,7 +15,7 @@ def crawl(index_of_product):
         sleep(3)
         
         # Click on the product
-        driver.find_element(By.XPATH, "//*[@id='categoryPage']/div[3]/ul/li["+ str(index_of_product) +"]").click()
+        driver.find_element(By.XPATH, "//*[@id='categoryPage']/div[3]/ul/li["+ str(index_of_products) +"]").click()
         sleep(3)
         
         try:
@@ -33,7 +33,7 @@ def crawl(index_of_product):
             for i in range(len(comments)):
                 txt = comments[i].text
                 n_stars = len(comments_stars[i].find_elements(By.CLASS_NAME, "iconcmt-starbuy"))
-                if (txt != "" or txt.strip()):
+                if (txt != "" or txt.strip() or (len(txt) >= 75 and len(txt) <= 300)):
                     writer.writerow([txt, n_stars, ""])
         except:
             check = False
@@ -55,7 +55,7 @@ def crawl(index_of_product):
                     for i in range(len(comments)):
                         txt = comments[i].text
                         n_stars = len(comments_stars[i].find_elements(By.CLASS_NAME, "iconcmt-starbuy"))
-                        if (txt != "" or txt.strip()):
+                        if (txt != "" or txt.strip() or (len(txt) >= 75 and len(txt) <= 300)):
                             writer.writerow([txt, n_stars, ""])
                 except:
                     pass
@@ -65,8 +65,7 @@ def crawl(index_of_product):
         driver.close()  # Close the driver
         
 def main():
-    # Change index_of_product to crawl other product or use for loop to crawl many products
-    crawl(index_of_product=1)
+    crawl(1)
     
 if __name__ == "__main__":
     main()
