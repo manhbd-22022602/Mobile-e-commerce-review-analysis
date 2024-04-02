@@ -1,16 +1,18 @@
-# Mobile-e-commerce-review-sentiment-classification
+# Phân tích Đánh giá Thương mại Điện tử Di động
 
-## Bài tập lớn môn Data Mining and Analysis
+## Bài tập lớn môn Khai thác và Phân tích Dữ liệu
 
-Nhóm 6
+Dự án này giải quyết các vấn đề liên quan đến ABSA.
 
-Gồm các thành viên
-- 22022602 - Bùi Đức Mạnh
-- 22022522 - Đàm Thái Ninh
-- 22022666 - Lê Việt Hùng
-- 22022569 - Trần Nam Anh
+Đạt tỉ lệ chính xác 77% trên tập dữ liệu kiểm thử UIT-ViSFD.
 
+## Hướng dẫn
 
-Guideline
+1. Tải về tệp [PhoW2V_words_300dims](https://public.vinai.io/word2vec_vi_words_300dims.zip) và đặt vào thư mục phow2v.
+2. Để biết thông tin chi tiết về mã nguồn, vui lòng đọc tệp document.md.
+3. Về notebook, vui lòng đọc tệp report.ipynb trong thư mục Báo cáo.
+4. Về slide, vui lòng đọc tệp slides.pdf
 
-[Hướng dẫn dán nhãn](https://www.notion.so/Annotation-Guideline-Mobile-E-commerce-Review-Sentiment-Classification-bf901d3e3aa142eeaaf26074191f02df#fc9a76296b194e249ca10bb45968b4d1)
+## Hỗ trợ
+
+Nếu bạn cần trợ giúp thêm, vui lòng liên hệ với tôi qua email: bdm2k4@gmail.com
