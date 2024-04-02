@@ -21,3 +21,5 @@ ignore_folder/
 refactor_data.ipynb
 demo.ipynb
 phow2v/word2vec_vi_words_300dims.txt
+w2v_300dims_cache.pkl
+datasets.rar
