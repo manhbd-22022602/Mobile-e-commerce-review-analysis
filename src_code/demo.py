@@ -18,9 +18,16 @@ svm_SSer = joblib.load('pretrained_svm/bestModelSSer')
 svm_SGeneral = joblib.load('pretrained_svm/bestModelSGeneral')
 svm_SOth = joblib.load('pretrained_svm/bestModelSOth')
 
-w2v_300dims = W2VLoader(
-    w2v_path='phow2v/word2vec_vi_words_300dims.txt'
-)
+#load w2v model
+try:
+    # Kiểm tra xem biến đã được lưu trong cache chưa
+    w2v_300dims = joblib.load('w2v_300dims_cache.pkl')
+    print("Đã load w2v_300dims từ cache.")
+except FileNotFoundError:
+    # Nếu chưa có trong cache, thực hiện load và lưu vào cache
+    w2v_300dims = W2VLoader(w2v_path='phow2v/word2vec_vi_words_300dims.txt')
+    joblib.dump(w2v_300dims, 'w2v_300dims_cache.pkl')
+    print("Đã load và lưu w2v_300dims vào cache.")
 
 #demo
 aspects = ['Pin', 'Service', 'General', 'Others']
